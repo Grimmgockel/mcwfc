@@ -1,0 +1,73 @@
+{ 
+  "offsets": { 
+    "top": [ 0, -1],
+    "right": [ 1, 0],
+    "bottom": [ 0, 1],
+    "left": [ -1, 0]
+  },
+  "subset" : {
+    "name" : "cl"
+  },
+  "subsets" : {
+    "all" : ["corner", "line", "empty", "cross", "t"],
+    "standard" : ["corner", "cross", "empty", "line"],
+    "fabric" : ["cross", "line"],
+    "dense fabric" : ["cross"],
+    "dense" : ["corner", "cross", "line", "t"],
+    "crossless" : ["corner", "empty", "line"],
+    "te" : ["t", "empty"],
+    "t" : ["t"],
+    "tl" : ["t", "line"],
+    "cl" : ["corner", "line"],
+    "ce" : ["corner", "empty"],
+    "c" : ["corner"],
+    "contradictions" : ["corner", "cross"]
+  },
+  "adjacencyRules" : { 
+    "corner": {
+      "file" : "corner.png",
+      "symmetry":  "L",
+      "weight": 1,
+      "left": [ "corner270", "corner180", "empty", "line90", "t90"],
+      "right": [ "corner270", "corner180", "line", "cross", "cross90", "t", "t90", "t180"],
+      "top": [ "corner180", "corner90", "line90", "cross", "cross90", "t", "t90", "t270"],
+      "bottom": [ "corner90", "corner180", "empty", "line", "t"]
+    },
+    "empty": {
+      "file" : "empty.png",
+      "symmetry": "X",
+      "weight": 1,
+      "left": [ "corner180", "corner270", "line90", "t90"],
+      "right": [ "corner", "corner90", "empty", "line90", "t270"],
+      "top": [ "corner", "corner270", "empty", "t180"],
+      "bottom": [ "corner90", "corner180", "t"]
+    },
+    "line": {
+      "file" : "line.png",
+      "symmetry": "I",
+      "weight": 1,
+      "left": [ "corner", "corner90", "line", "cross", "cross90", "t", "t180", "t270"],
+      "right": [ "corner180", "corner270", "line", "cross", "cross90", "t", "t90", "t180"],
+      "top": [ "line", "empty", "corner", "corner270", "t180"],
+      "bottom": [ "corner90", "corner180", "empty", "line", "t"]
+    },
+    "cross": {
+      "file" : "cross.png",
+      "symmetry": "I",
+      "weight" : 1,
+      "left": ["cross", "cross90", "corner", "corner90", "line", "t", "t180", "t270"],
+      "right": ["cross", "cross90", "corner180", "corner270", "line", "t", "t90", "t180"],
+      "top": ["cross", "cross90", "line90", "corner90", "corner180", "t", "t90", "t270"],
+      "bottom": ["cross", "cross90", "line90", "corner270", "corner", "t90", "t180", "t270"]
+    },
+    "t": {
+      "file" : "t.png",
+      "symmetry" : "L",
+      "weight" : 1,
+      "left": ["line", "corner", "corner90", "cross", "cross90", "t", "t180", "t270"],
+      "right": ["line", "corner270", "corner180", "cross", "cross90", "t", "t90", "t180"],
+      "top": ["empty", "line", "corner270", "corner", "t180"],
+      "bottom": ["line90", "corner270", "corner", "cross", "cross90", "t90", "t180", "t270"]
+    }
+  }
+}
