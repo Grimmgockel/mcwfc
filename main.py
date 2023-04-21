@@ -1,34 +1,37 @@
 import amulet
-from amulet.api.errors import ChunkLoadError, ChunkDoesNotExist
+from amulet.api.block import Block
 
 # load the level
-# this will automatically find the wrapper that can open the world and set everything up for you.
-RELATIVE_WORLD_PATH = "../../.minecraft/saves/test_world/"
-level = amulet.load_format(RELATIVE_WORLD_PATH)
+ANVIL_WORLD = "../../AppData/Roaming/.minecraft/saves/test_anvil/"
+level = amulet.load_level(ANVIL_WORLD)
 
-# read a chunk
-try:
-    chunk = level.get_chunk(0, 0, "minecraft:overworld")
-except ChunkDoesNotExist:
-    # if a chunk is accessed that does not exist this code will be run.
-    print("Chunk does not exist")
-except ChunkLoadError:
-    # if a chunk is corrupt, is in an unsupported format or
-    # just did not load for some reason this code will run.
-    # This error would also catch ChunkDoesNotExist if the previous except block did not exist.
-    print("Chunk load error")
-else:
-    # if no errors occurred.
-    print(chunk)
-    # Chunk(
-    #   0,
-    #   0,
-    #   UnboundedPartial3DArray(dtype=<class 'numpy.uint32'>, shape=(16, inf, 16)),
-    #   EntityList([]),
-    #   BlockEntityDict()
-    # )
+# pick a game version that we want to work with
+game_version = ("java", (1, 17, 0))
 
-    # make changes to the chunk here
+# get a block 
+block, block_entity = level.get_version_block(
+    0,
+    70,
+    0,
+    "minecraft:overworld",
+    game_version,
+)
+
+if isinstance(block, Block):
+        # Check that what we have is actually a block
+        print(block)
+
+# set a block
+# define a block in the format of the version we want to work with
+block = Block("minecraft", "stone")
+level.set_version_block(
+    0,
+    70,
+    0,
+    "minecraft:overworld",
+    game_version,
+    block,
+)
 
 # save the changes to the world
 level.save()
