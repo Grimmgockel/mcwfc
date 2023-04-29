@@ -14,21 +14,9 @@ class Realm(Enum):
 
 
 class World:
-    def __init__(self, world_name, version):
+    def __init__(self, world_path, version):
         # set world name
-        self.world_name = world_name
-
-        # construct path to world data
-        # TODO absolute paths
-        os_name = platform.system()
-
-        system_path = ""
-        if os_name == "Windows":
-            system_path = "../../AppData/Roaming/"
-        elif os_name == "Linux":
-            system_path = "../../../"
-        world_path = ".minecraft/saves/"
-        self.world_path = system_path + world_path + self.world_name + "/"
+        self.world_path = world_path
 
         # construct version tuple from string "<version_name> <version_number>"
         version_components = version.split(" ")
